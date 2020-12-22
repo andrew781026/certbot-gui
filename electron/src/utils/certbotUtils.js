@@ -16,6 +16,7 @@ const addSSL = domain => {
         const tooManyMsg = `too many certificates already issued for exact set of domains: `;
         const existedMsg = `Keeping the existing certificate`;
         const createMsg = `Congratulations! Your certificate and chain have been saved at`;
+        const domainNotExistMsg = `check that a DNS record exists for`;
 
         // 如果收到下方資訊 , 代表近期建立太多次 , letsencrypt 拒絕請求
         if (data.indexOf(tooManyMsg) > -1) {
@@ -28,6 +29,13 @@ const addSSL = domain => {
         else if (data.indexOf(existedMsg) > -1) {
 
             emitter.emit('success', existedMsg)
+
+        }
+
+        // 域名不存在
+        else if (data.indexOf(domainNotExistMsg) > -1) {
+
+            emitter.emit('error', new Error(domainNotExistMsg))
 
         }
 
@@ -132,7 +140,7 @@ const settingEmail = email => {
     return emitter;
 }
 
-module.export = {
+module.exports = {
     addSSL,
     deleteSSL,
     renewSSL,
