@@ -127,3 +127,71 @@ certbot 參數中有一個 -n ( Run non-interactively ) 非互動模式 , 專門
 
 - [certbot on windows](https://certbot.eff.org/lets-encrypt/windows-nginx)
 
+---
+
+各種不同的訊息 & 其相關回應
+
+## 新增 SSL 
+
+#### 建立次數過多 , letsencrypt 拒絕此次建立
+```shell
+C:\Users\andrew>certbot certonly --standalone -d azure.test.andrewdeveloper.com -n
+Saving debug log to C:\Certbot\log\letsencrypt.log
+Plugins selected: Authenticator standalone, Installer None
+Requesting a certificate for azure.test.andrewdeveloper.com
+[31mAn unexpected error occurred:[0m
+[31mThere were too many requests of a given type :: Error creating new order :: too many certificates already issued for exact set of domains: azure.test.andrewdeveloper.com: see https://letsencrypt.org/docs/rate-limits/[0m
+Please see the logfiles in C:\Certbot\log for more details.
+```
+
+#### 已有憑證 
+```shell
+C:\Users\andrew>certbot certonly --standalone -d azure2.test.andrewdeveloper.com -n
+Saving debug log to C:\Certbot\log\letsencrypt.log
+Plugins selected: Authenticator standalone, Installer None
+Cert not yet due for renewal
+Keeping the existing certificate
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Certificate not yet due for renewal; no action taken.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+```
+
+#### 成功建立
+```shell
+C:\Users\andrew>certbot certonly --standalone -d azure2.test.andrewdeveloper.com -n
+Saving debug log to C:\Certbot\log\letsencrypt.log
+Plugins selected: Authenticator standalone, Installer None
+Requesting a certificate for azure2.test.andrewdeveloper.com
+[1m
+IMPORTANT NOTES:
+[0m - Congratulations! Your certificate and chain have been saved at:
+   C:\Certbot\live\azure2.test.andrewdeveloper.com\fullchain.pem
+   Your key file has been saved at:
+   C:\Certbot\live\azure2.test.andrewdeveloper.com\privkey.pem
+   Your cert will expire on 2021-03-22. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot renew"
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+```
+
+## 刪除 SSL
+
+#### 成功刪除
+```shell
+C:\Users\andrew>certbot delete --cert-name=azure2.test.andrewdeveloper.com -n
+Saving debug log to C:\Certbot\log\letsencrypt.log
+Deleted all files relating to certificate azure2.test.andrewdeveloper.com.
+```
+
+#### 刪除失敗
+```shell
+C:\Users\andrew>certbot delete --cert-name=azure2.test.andrewdeveloper.com -n
+Saving debug log to C:\Certbot\log\letsencrypt.log
+No certificate found with name azure2.test.andrewdeveloper.com (expected C:\Certbot\renewal\azure2.test.andrewdeveloper.com.conf)
+```
+

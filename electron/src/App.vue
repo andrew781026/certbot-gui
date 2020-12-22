@@ -1,15 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <MyFormWizard msg="Welcome to Your Vue.js App"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MyFormWizard from './components/MyFormWizard.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MyFormWizard
   }
 }
 </script>
