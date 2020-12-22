@@ -17,8 +17,7 @@
     "@vue/composition-api": "^1.0.0-beta.19",
     "core-js": "^3.6.5",
     "element-ui": "^2.14.1",
-    "vue": "^2.6.11",
-    "vue-form-wizard": "^0.8.4"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

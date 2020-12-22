@@ -131,6 +131,14 @@ certbot 參數中有一個 -n ( Run non-interactively ) 非互動模式 , 專門
 
 各種不同的訊息 & 其相關回應
 
+## 任意指令
+
+#### cmd 權限不足 , 不能執行 certbot 
+```shell
+C:\Users\andrew>certbot
+Error, certbot must be run on a shell with administrative rights.
+```
+
 ## 新增 SSL 
 
 #### 建立次數過多 , letsencrypt 拒絕此次建立
@@ -195,3 +203,22 @@ Saving debug log to C:\Certbot\log\letsencrypt.log
 No certificate found with name azure2.test.andrewdeveloper.com (expected C:\Certbot\renewal\azure2.test.andrewdeveloper.com.conf)
 ```
 
+## 更新 SSL
+
+#### 期限還沒到 , 不用更新
+```shell
+C:\Users\andrew>certbot renew
+Saving debug log to C:\Certbot\log\letsencrypt.log
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Processing C:\Certbot\renewal\azure2.test.andrewdeveloper.com.conf
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Cert not yet due for renewal
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+The following certs are not due for renewal yet:
+  C:\Certbot\live\azure2.test.andrewdeveloper.com\fullchain.pem expires on 2021-03-22 (skipped)
+No renewals were attempted.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+```
