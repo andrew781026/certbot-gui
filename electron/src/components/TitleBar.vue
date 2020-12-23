@@ -3,18 +3,18 @@
     <div id="drag-region" class="drag-region">
       <div id="window-controls" class="no-drag">
 
-        <div class="button" id="min-button">
+        <div class="button" id="min-button" @click="min">
           <img class="icon" :src="require('../assets/icons/min-w-30.png')" draggable="false"/>
         </div>
 
-        <div class="button" id="restore-button" v-if="isMax" @click="isMax = false">
+        <div class="button" id="restore-button" v-if="isMax" @click="restore">
           <img class="icon" :src="require('../assets/icons/restore-w-30.png')" draggable="false"/>
         </div>
-        <div class="button" id="max-button" v-else @click="isMax = true">
+        <div class="button" id="max-button" v-else @click="max">
           <img class="icon" :src="require('../assets/icons/max-w-30.png')" draggable="false"/>
         </div>
 
-        <div class="button" id="close-button">
+        <div class="button" id="close-button" @click="exit">
           <img class="icon" :src="require('../assets/icons/close-w-30.png')" draggable="false"/>
         </div>
 
@@ -26,6 +26,27 @@
 <script>
 export default {
   name: "TitleBar",
+  methods: {
+    min() {
+
+      window.ipcRenderer.send('titlebar:minimize');
+    },
+    max() {
+
+      window.ipcRenderer.send('titlebar:maximize');
+      this.isMax = true;
+    },
+    restore() {
+
+      window.ipcRenderer.send('titlebar:unmaximize');
+      this.isMax = false;
+    },
+    exit() {
+
+      console.log('exit')
+      window.ipcRenderer.send('titlebar:exit');
+    },
+  },
   data() {
 
     return {

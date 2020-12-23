@@ -1,4 +1,5 @@
 const fse = require('fs-extra')
+const path = require('path')
 import {app, protocol, BrowserWindow} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS_DEVTOOLS} from 'electron-devtools-installer'
@@ -12,7 +13,7 @@ protocol.registerSchemesAsPrivileged([
     {scheme: 'app', privileges: {secure: true, standard: true}}
 ])
 
-function deletePlugin({id:pluginId, electron}) {
+function deletePlugin({id: pluginId, electron}) {
 
     // C:\Users\andrew\AppData\Roaming\certbot-gui-tool\extensions
     // 取得 installExtension 的安裝路徑
@@ -26,11 +27,11 @@ function deletePlugin({id:pluginId, electron}) {
 async function createWindow() {
     // Create the browser window.
     const win = new BrowserWindow({
-        frame:false,
+        frame: false,
         width: 800,
         height: 600,
         webPreferences: {
-            preload: './preload.js'
+            preload: path.join(__dirname, 'preload.js')
         }
     })
 
