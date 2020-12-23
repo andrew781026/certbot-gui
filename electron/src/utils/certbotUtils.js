@@ -21,6 +21,7 @@ const addSSL = domain => {
         // 如果收到下方資訊 , 代表近期建立太多次 , letsencrypt 拒絕請求
         if (data.indexOf(tooManyMsg) > -1) {
 
+            // too many request
             emitter.emit('error', new Error(tooManyMsg))
 
         }
@@ -28,6 +29,7 @@ const addSSL = domain => {
         // SSL 憑證已存在
         else if (data.indexOf(existedMsg) > -1) {
 
+            // certificate already exist
             emitter.emit('success', existedMsg)
 
         }
@@ -35,6 +37,7 @@ const addSSL = domain => {
         // 域名不存在
         else if (data.indexOf(domainNotExistMsg) > -1) {
 
+            // domain not found
             emitter.emit('error', new Error(domainNotExistMsg))
 
         }
@@ -42,6 +45,7 @@ const addSSL = domain => {
         // SSL 憑證建立成功
         else if (data.indexOf(createMsg) > -1) {
 
+            // successfully created
             emitter.emit('success', createMsg)
 
         } else emitter.emit('info', data)

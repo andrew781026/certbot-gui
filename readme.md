@@ -2,13 +2,22 @@
 
 this is a ElectronJS App using exec to execute certbot scripts
 
-### install
+### preinstall
 
-you can download the [certbot windows installer](https://dl.eff.org/certbot-beta-installer-win32.exe)
+You must have installed the certbot on your win os 
 
-![certbot-install step_1](https://i.imgur.com/qnXhvBA.png)
-![certbot-install step_2](https://i.imgur.com/gXcOXFw.png)
-![certbot-install step_3](https://i.imgur.com/pvMrX1N.png)
-![certbot-install step_4](https://i.imgur.com/ZPYun5h.png)
+install steps please see : https://github.com/andrew781026/certbot-gui/blob/master/certbot-installer.md
 
+### scripts 
 
+Use node.js exec to control certbot , please ref : https://github.com/andrew781026/certbot-gui/blob/master/electron/src/utils/certbotUtils.js
+
+### Aim ( haven't complete )
+
+below is the app will look like 
+
+![](https://i.imgur.com/1azrh29.png)
+
+### others
+
+if you using docker & node.js , you can use [NoDock](https://github.com/Osedea/nodock#Certbot)
