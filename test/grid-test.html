@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            background-color: chocolate;
+            border-radius: 10px;
+            border: 7px slategray solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5em;
+            color: #f0f0f0;
+        }
+
+        .wrap {
+            gap: 5px;
+            height: 400px;
+            width: 400px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+</div>
+</body>
+</html>
