@@ -10,11 +10,13 @@ export default {
     isCertbotInstalled() {
 
       // ipcMain cannot return error object , so we need to custom our own error
+      /*
       window.ipcRenderer.invoke('andrew:isCertbotInstalled')
           .then(isInstalled => {
 
             
           })
+       */
     }
   }
 }

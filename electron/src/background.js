@@ -26,12 +26,15 @@ function deletePlugin({id:pluginId, electron}) {
 async function createWindow() {
     // Create the browser window.
     const win = new BrowserWindow({
+        frame:false,
         width: 800,
         height: 600,
         webPreferences: {
             preload: './preload.js'
         }
     })
+
+    win.webContents.openDevTools();
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode

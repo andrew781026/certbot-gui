@@ -1,28 +1,36 @@
 <template>
-  <div>
+  <div id="app">
+    <TitleBar/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <MyFormWizard msg="Welcome to Your Vue.js App"/>
+    <main>
+      <router-view/>
+    </main>
   </div>
 </template>
 
 <script>
-import MyFormWizard from './components/MyFormWizard.vue'
+import TitleBar from "@/components/TitleBar";
 
 export default {
   name: 'App',
-  components: {
-    MyFormWizard
-  }
+  components: {TitleBar},
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+}
+
+main{
+  min-height: calc(100vh - 50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 </style>

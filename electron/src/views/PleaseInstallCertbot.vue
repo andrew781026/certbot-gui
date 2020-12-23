@@ -7,7 +7,15 @@
 
 <script>
 export default {
-  name: "PleaseInstallCertbot"
+  name: "PleaseInstallCertbot",
+  methods: {
+
+    downloadCertbot() {
+
+      // 開啟連結 , 下載 certbot 安裝檔
+
+    }
+  }
 }
 </script>
 
