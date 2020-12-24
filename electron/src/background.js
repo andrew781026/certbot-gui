@@ -1,5 +1,5 @@
-const fse = require('fs-extra')
-const path = require('path')
+import fse from 'fs-extra'
+import path from 'path'
 import {app, protocol, BrowserWindow} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS_DEVTOOLS} from 'electron-devtools-installer'

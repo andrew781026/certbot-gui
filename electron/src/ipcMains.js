@@ -1,28 +1,37 @@
-import {ipcMain, BrowserWindow} from 'electron'
+import {ipcMain, BrowserWindow} from 'electron';
+import {checkCertbotExistence} from './utils/certbotUtils';
 
-ipcMain.handle('andrew:isCertbotInstalled', async (event, args) => {
+const showErrMsg = (event, err) => {
+    console.error(err);
+    event.reply('andrew:show-err-msg', err instanceof Error ? err.message : err);
+};
 
-    // 使用 exec 確認 certbot 是否可以使用
+ipcMain.handle('andrew:isCertbotInstalled', event => {
 
-    return true;
+    return checkCertbotExistence().catch(err => showErrMsg(event, err));
 })
 
-ipcMain.on('titlebar:minimize', event => {
+const registerTitleBarFn = () => {
 
-    BrowserWindow.fromWebContents(event.sender).minimize();
-})
+    ipcMain.on('titlebar:minimize', event => {
 
-ipcMain.on('titlebar:maximize', event => {
+        BrowserWindow.fromWebContents(event.sender).minimize();
+    })
 
-    BrowserWindow.fromWebContents(event.sender).maximize();
-})
+    ipcMain.on('titlebar:maximize', event => {
 
-ipcMain.on('titlebar:unmaximize', event => {
+        BrowserWindow.fromWebContents(event.sender).maximize();
+    })
 
-    BrowserWindow.fromWebContents(event.sender).unmaximize();
-})
+    ipcMain.on('titlebar:unmaximize', event => {
 
-ipcMain.on('titlebar:exit', event => {
+        BrowserWindow.fromWebContents(event.sender).unmaximize();
+    })
 
-    BrowserWindow.fromWebContents(event.sender).close();
-})
+    ipcMain.on('titlebar:exit', event => {
+
+        BrowserWindow.fromWebContents(event.sender).close();
+    })
+}
+
+registerTitleBarFn();

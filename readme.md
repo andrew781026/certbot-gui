@@ -1,6 +1,14 @@
 # Certbot GUI
 
+::: not an official project :::
+
 this is a ElectronJS App using exec to execute certbot scripts
+
+## Introduce
+
+Certbot is *Free* SSL certificate generator , it is great but CLI only
+
+So , I will make a GUI for it , Good Luck to myself 🙆‍♂️, Making this thing **DONE**
 
 ### preinstall
 

@@ -1,8 +1,9 @@
 <template>
   <div>
     <h1>請安裝 Certbot</h1>
-    <span>http:....</span>
-    <el-button>我已安裝 Certbot</el-button>
+    <a>https://dl.eff.org/certbot-beta-installer-win32.exe</a>
+    <el-button type="primary">我已安裝 Certbot</el-button>
+    <el-button type="primary" plain>如何安裝 Cerbot ?</el-button>
   </div>
 </template>
 

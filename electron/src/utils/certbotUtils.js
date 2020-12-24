@@ -118,7 +118,6 @@ const renewSSL = () => {
     return emitter;
 }
 
-
 const settingEmail = email => {
 
     const cmd = `certbot update_account --email ${email} -n`
@@ -144,9 +143,30 @@ const settingEmail = email => {
     return emitter;
 }
 
+const checkCertbotExistence = () => {
+
+    return new Promise((resolve, reject) => {
+
+        const errMsg = 'you must install certbot to your machine , the installer at : https://dl.eff.org/certbot-beta-installer-win32.exe';
+
+        exec('certbot --version', (error, stdout) => {
+
+            if (error) {
+
+                const err = new Error();
+                err.message = errMsg
+                err.stack = error;
+                reject(err)
+
+            } else resolve(stdout)
+        });
+    })
+}
+
 module.exports = {
     addSSL,
     deleteSSL,
     renewSSL,
     settingEmail,
+    checkCertbotExistence,
 }

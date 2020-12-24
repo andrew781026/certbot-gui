@@ -1,5 +1,8 @@
 <template>
-  <div>確認 Certbot 是否已安裝</div>
+  <div>
+    <h1>確認 Certbot 是否已安裝</h1>
+    <img :src="require('@/assets/loading.svg')" alt="loading">
+  </div>
 </template>
 
 <script>

@@ -10,6 +10,16 @@ const routes = [
         component: () => import('../views/PleaseInstallCertbot')
     },
     {
+        path: '/check-certbot',
+        name: 'CheckCertbot',
+        component: () => import('../views/CheckCertbot')
+    },
+    {
+        path: '/features-menu',
+        name: 'FeaturesMenu',
+        component: () => import('../views/FeaturesMenu')
+    },
+    {
         path: '/home',
         name: 'Home',
         component: () => import('../views/Home')
