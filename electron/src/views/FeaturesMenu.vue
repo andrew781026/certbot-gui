@@ -24,7 +24,7 @@ export default {
     },
     view() {
 
-      this.$router.push({name: ''})
+      this.$router.push({name: 'ViewSSL'})
     },
     setting() {
 
@@ -48,6 +48,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
   font-size: 40px;
   color: #ffffff;
   font-weight: 700;
