@@ -25,15 +25,15 @@ export default {
       menus: [
         {
           name: 'PleaseInstallCertbot',
-          label: '已安裝 Certbot',
+          label: '請安裝 Certbot',
         },
         {
-          name: 'NotifyEmail',
-          label: '設定信箱',
+          name: 'CheckCertbot',
+          label: '確認 Certbot 安裝',
         },
         {
-          name: 'DeleteSSL',
-          label: '刪除憑證',
+          name: 'FeaturesMenu',
+          label: '功能選擇頁',
         },
       ]
     }
@@ -57,7 +57,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
+  width: 150px;
   height: 40px;
 
   &:not(:last-child) {

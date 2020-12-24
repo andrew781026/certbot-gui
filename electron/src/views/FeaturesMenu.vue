@@ -2,17 +2,35 @@
   <div>
     <h1>功能列表</h1>
     <div class="btn-wrap">
-      <div class="box">新增</div>
-      <div class="box">刪除</div>
-      <div class="box">查看</div>
-      <div class="box">設定</div>
+      <div class="box" @click="add">新增</div>
+      <div class="box" @click="deleteSSL">刪除</div>
+      <div class="box" @click="view">查看</div>
+      <div class="box" @click="setting">設定</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "FeaturesMenu"
+  name: "FeaturesMenu",
+  methods: {
+    add() {
+
+      this.$router.push({name: 'AddSSL'})
+    },
+    deleteSSL() {
+
+      this.$router.push({name: 'DeleteSSL'})
+    },
+    view() {
+
+      this.$router.push({name: ''})
+    },
+    setting() {
+
+      this.$router.push({name: 'NotifyEmail'})
+    },
+  }
 }
 </script>
 
@@ -31,8 +49,8 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 40px;
-  color: #f0f0f0;
-  font-weight: 900;
+  color: #ffffff;
+  font-weight: 700;
   background-color: #409eff;
   height: 150px;
   width: 150px;

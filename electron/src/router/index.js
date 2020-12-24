@@ -20,6 +20,11 @@ const routes = [
         component: () => import('../views/DeleteSSL')
     },
     {
+        path: '/add-ssl',
+        name: 'AddSSL',
+        component: () => import('../views/AddSSL')
+    },
+    {
         path: '/check-certbot',
         name: 'CheckCertbot',
         component: () => import('../views/CheckCertbot')

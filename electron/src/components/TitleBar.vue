@@ -1,6 +1,11 @@
 <template>
   <header id="titlebar">
     <div id="drag-region" class="drag-region">
+
+      <div class="back-icon no-drag" @click="back">
+        <i class="el-icon-back"></i>
+      </div>
+
       <div id="window-controls" class="no-drag">
 
         <div class="button" id="min-button" @click="min">
@@ -27,6 +32,10 @@
 export default {
   name: "TitleBar",
   methods: {
+    back() {
+
+      window.history.back();
+    },
     min() {
 
       window.ipcRenderer.send('titlebar:minimize');
@@ -58,6 +67,27 @@ export default {
 
 <style scoped>
 
+.back-icon {
+  margin-left: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  font-size: 30px;
+  color: #ffffff;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.back-icon:hover {
+  background-color: #b6b4b4;
+}
+
+.back-icon:active {
+  background-color: #939292;
+}
+
 .drag-region {
   -webkit-app-region: drag;
 }
@@ -78,6 +108,8 @@ export default {
 #titlebar #drag-region {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 #window-controls {
