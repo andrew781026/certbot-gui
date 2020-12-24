@@ -10,6 +10,16 @@ const routes = [
         component: () => import('../views/PleaseInstallCertbot')
     },
     {
+        path: '/notify-email',
+        name: 'NotifyEmail',
+        component: () => import('../views/NotifyEmail')
+    },
+    {
+        path: '/delete-ssl',
+        name: 'DeleteSSL',
+        component: () => import('../views/DeleteSSL')
+    },
+    {
         path: '/check-certbot',
         name: 'CheckCertbot',
         component: () => import('../views/CheckCertbot')

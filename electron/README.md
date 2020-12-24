@@ -1,24 +1,7 @@
-# electron
+# certbot-gui-tool
 
-## Project setup
-```
-npm install
-```
+### assets
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Assets from : 
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [loading.io](https://loading.io/)
