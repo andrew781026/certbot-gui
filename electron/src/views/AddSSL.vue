@@ -5,8 +5,8 @@
                  placeholder="請輸入要建立的域名 ( domain name )"
                  :img-src="require('@/assets/domain-registration-color.svg')"/>
     <el-button-group class="w-full" style="margin-top: 20px;">
-      <el-button type="info" class="w-1/2">取消</el-button>
-      <el-button type="success" class="w-1/2">新建</el-button>
+      <el-button type="info" class="w-1/2" @click="$router.back()">取消</el-button>
+      <el-button type="success" class="w-1/2" @click="addSSL">新建</el-button>
     </el-button-group>
   </div>
 </template>
@@ -25,9 +25,8 @@ export default {
   },
   methods: {
 
-    nextStep() {
+    addSSL() {
 
-      // 開啟連結 , 下載 certbot 安裝檔
 
     }
   }

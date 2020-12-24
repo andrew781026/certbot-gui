@@ -5,7 +5,7 @@
                  placeholder="請輸入要刪除的域名 ( domain name )"
                  :img-src="require('@/assets/domain-registration-color.svg')"/>
     <el-button-group class="w-full" style="margin-top: 20px;">
-      <el-button type="info" class="w-1/2">取消</el-button>
+      <el-button type="info" class="w-1/2" @click="$router.back()">取消</el-button>
       <el-button type="danger" class="w-1/2">刪除</el-button>
     </el-button-group>
   </div>

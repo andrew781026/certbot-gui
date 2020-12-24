@@ -5,7 +5,7 @@
                  placeholder="請輸入要通知的 EMail"
                  :img-src="require('@/assets/gmail.svg')"/>
     <el-button-group class="w-full mt-8">
-      <el-button type="info" class="w-1/2">取消</el-button>
+      <el-button type="info" class="w-1/2" @click="$router.back()">取消</el-button>
       <el-button type="success" class="w-1/2">設定</el-button>
     </el-button-group>
   </div>

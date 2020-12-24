@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>功能列表</h1>
+    <h1 class="text-4xl mb-3">功能列表</h1>
     <div class="btn-wrap">
       <div class="box" @click="add">新增</div>
       <div class="box" @click="deleteSSL">刪除</div>

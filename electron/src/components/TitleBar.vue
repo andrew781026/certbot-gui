@@ -97,6 +97,7 @@ export default {
 }
 
 #titlebar {
+  user-select: none;
   position: relative;
   display: block;
   height: 50px;

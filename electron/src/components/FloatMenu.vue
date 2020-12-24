@@ -53,6 +53,7 @@ export default {
 }
 
 .menu-item {
+  user-select: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
