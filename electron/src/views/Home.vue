@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>歡迎使用 Certbot 管理器</h1>
+        <h1 class="text-3xl">歡迎使用 Certbot 管理器</h1>
     </div>
 </template>
 
