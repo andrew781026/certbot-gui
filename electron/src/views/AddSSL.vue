@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>請輸入要建立的域名</h1>
+    <h1 class="text-4xl mb-3">請輸入要建立的域名</h1>
     <CustomInput v-model="domain"
                  placeholder="請輸入要建立的域名 ( domain name )"
                  :img-src="require('@/assets/domain-registration-color.svg')"/>

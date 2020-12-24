@@ -15,13 +15,13 @@ export default {
   props: {
     imgSrc: String,
     value: String,
-    placeholder:String,
+    placeholder: String,
   }
 }
 </script>
 
 <style scoped>
-/* override el-input padding-left */
+/* override the el-input padding-left */
 .el-input--prefix /deep/ .el-input__inner {
 
   padding-left: 40px;
