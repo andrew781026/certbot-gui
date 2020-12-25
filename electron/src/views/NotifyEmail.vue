@@ -6,13 +6,15 @@
                  :img-src="require('@/assets/gmail.svg')"/>
     <el-button-group class="w-full mt-8">
       <el-button type="info" class="w-1/2" @click="$router.back()">取消</el-button>
-      <el-button type="success" class="w-1/2">設定</el-button>
+      <el-button type="success" class="w-1/2" @click="notifyEmail">設定</el-button>
     </el-button-group>
   </div>
 </template>
 
 <script>
 import CustomInput from "@/components/CustomInput";
+import {settingEmail} from "@/utils/eventCenter";
+
 export default {
   name: "NotifyEmail",
   components: {CustomInput},
@@ -24,10 +26,11 @@ export default {
   },
   methods: {
 
-    addNotifyEmail() {
+    notifyEmail() {
 
-      // 開啟連結 , 下載 certbot 安裝檔
-
+      settingEmail(this.email)
+          .then(() => this.$router.push({name: 'FeaturesMenu'}))
+          .catch(console.error)
     }
   }
 }

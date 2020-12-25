@@ -2,7 +2,7 @@
   <header id="titlebar">
     <div id="drag-region" class="drag-region">
 
-      <div class="back-icon no-drag" @click="back">
+      <div v-if="backArrowVisible" class="back-icon no-drag" @click="back">
         <i class="el-icon-back"></i>
       </div>
 
@@ -29,8 +29,14 @@
 </template>
 
 <script>
+import {backArrowVisible} from "@/compositions/useBackArrow";
+
 export default {
   name: "TitleBar",
+  setup() {
+
+    return {backArrowVisible}
+  },
   methods: {
     back() {
 

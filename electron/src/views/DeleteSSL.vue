@@ -29,10 +29,7 @@ export default {
     delSSL() {
 
       deleteSSL(this.domain)
-          .then(() => {
-
-            this.$router.push({name: 'ViewSSL'})
-          })
+          .then(() => this.$router.push({name: 'ViewSSL'}))
           .catch(console.error)
     }
   }

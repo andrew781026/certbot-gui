@@ -1,9 +1,7 @@
-import fse from 'fs-extra'
 import path from 'path'
 import {app, protocol, BrowserWindow} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS_DEVTOOLS} from 'electron-devtools-installer'
-import {name as pkgName} from '../package.json'
 import './ipcMains'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -13,24 +11,13 @@ protocol.registerSchemesAsPrivileged([
     {scheme: 'app', privileges: {secure: true, standard: true}}
 ])
 
-function deletePlugin({id: pluginId, electron}) {
-
-    // C:\Users\andrew\AppData\Roaming\certbot-gui-tool\extensions
-    // 取得 installExtension 的安裝路徑
-    const userFolder = app.getPath('home');
-    const pluginFolderPath = `${userFolder}/AppData/Roaming/${pkgName}/extensions/${pluginId}`
-    const pluginCrxPath = `${userFolder}/AppData/Roaming/${pkgName}/extensions/${pluginId}.crx`
-    fse.removeSync(pluginFolderPath);
-    fse.removeSync(pluginCrxPath);
-}
-
 async function createWindow() {
     // Create the browser window.
     const win = new BrowserWindow({
         frame: false,
         width: 800,
         height: 600,
-        icon:path.join(__dirname, '../public/electron-certbot-icon.png'),
+        // icon: path.join(__dirname, '../public/electron-certbot-icon.png'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }

@@ -11,23 +11,33 @@
 </template>
 
 <script>
+import {showBackArrow,hideBackArrow} from "@/compositions/useBackArrow";
+
 export default {
   name: "FeaturesMenu",
+  mounted() {
+
+    hideBackArrow();
+  },
   methods: {
     add() {
 
+      showBackArrow();
       this.$router.push({name: 'AddSSL'})
     },
     deleteSSL() {
 
+      showBackArrow();
       this.$router.push({name: 'DeleteSSL'})
     },
     view() {
 
+      showBackArrow();
       this.$router.push({name: 'ViewSSL'})
     },
     setting() {
 
+      showBackArrow();
       this.$router.push({name: 'NotifyEmail'})
     },
   }
