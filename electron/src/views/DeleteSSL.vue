@@ -6,13 +6,15 @@
                  :img-src="require('@/assets/domain-registration-color.svg')"/>
     <el-button-group class="w-full" style="margin-top: 20px;">
       <el-button type="info" class="w-1/2" @click="$router.back()">取消</el-button>
-      <el-button type="danger" class="w-1/2">刪除</el-button>
+      <el-button type="danger" class="w-1/2" @click="delSSL">刪除</el-button>
     </el-button-group>
   </div>
 </template>
 
 <script>
 import CustomInput from "@/components/CustomInput";
+import {deleteSSL} from "@/utils/eventCenter";
+
 export default {
   name: "DeleteSSL",
   components: {CustomInput},
@@ -24,10 +26,14 @@ export default {
   },
   methods: {
 
-    downloadCertbot() {
+    delSSL() {
 
-      // 開啟連結 , 下載 certbot 安裝檔
+      deleteSSL(this.domain)
+          .then(() => {
 
+            this.$router.push({name: 'ViewSSL'})
+          })
+          .catch(console.error)
     }
   }
 }

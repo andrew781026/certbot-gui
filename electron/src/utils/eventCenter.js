@@ -1,21 +1,12 @@
 const ipcRenderer = window.ipcRenderer
 
-const addSSL = async domain => {
+export const addSSL = domain => ipcRenderer.invoke('certbot:addSSL', domain);
 
+export const deleteSSL = domain => ipcRenderer.invoke('certbot:deleteSSL', domain);
 
-}
+export const viewSSLs = () => ipcRenderer.invoke('certbot:viewSSLs');
 
-const deleteSSL = async domain => {
+export const settingEmail = email => ipcRenderer.invoke('certbot:settingEmail', email);
 
+export const checkCertbotExistence = () => ipcRenderer.invoke('certbot:checkCertbotExistence');
 
-}
-
-const checkCertbotExistence = async domain => {
-
-
-}
-
-const settingEmail = async domain => {
-
-
-}

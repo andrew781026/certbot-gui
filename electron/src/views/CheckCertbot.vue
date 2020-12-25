@@ -6,22 +6,16 @@
 </template>
 
 <script>
+import {checkCertbotExistence} from "@/utils/eventCenter";
+
 export default {
   name: "CheckCertbot",
-  methods: {
+  mounted() {
 
-    isCertbotInstalled() {
-
-      // ipcMain cannot return error object , so we need to custom our own error
-      /*
-      window.ipcRenderer.invoke('andrew:isCertbotInstalled')
-          .then(isInstalled => {
-
-            
-          })
-       */
-    }
-  }
+    checkCertbotExistence()
+        .then(() => this.$router.push({name: 'FeaturesMenu'}))
+        .catch(() => this.$router.push({name: 'PleaseInstallCertbot'}))
+  },
 }
 </script>
 

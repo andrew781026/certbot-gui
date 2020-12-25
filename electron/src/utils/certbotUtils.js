@@ -1,5 +1,4 @@
 const {exec} = require('child_process');
-const events = require('events');
 
 const addSSL = domain => {
 
@@ -7,49 +6,50 @@ const addSSL = domain => {
 
     const proc = exec(cmd);
 
-    const emitter = new events.EventEmitter();
+    return new Promise((resolve, reject) => {
 
-    proc.stdout.on("data", (data) => {
+        const timerId = setTimeout(() => reject(new Error('error in add ssl')), 2000);
 
-        const tooManyMsg = `too many certificates already issued for exact set of domains: `;
-        const existedMsg = `Keeping the existing certificate`;
-        const createMsg = `Congratulations! Your certificate and chain have been saved at`;
-        const domainNotExistMsg = `check that a DNS record exists for`;
+        proc.stdout.on("data", (data) => {
 
-        // 如果收到下方資訊 , 代表近期建立太多次 , letsencrypt 拒絕請求
-        if (data.indexOf(tooManyMsg) > -1) {
+            const tooManyMsg = `too many certificates already issued for exact set of domains: `;
+            const existedMsg = `Keeping the existing certificate`;
+            const createMsg = `Congratulations! Your certificate and chain have been saved at`;
+            const domainNotExistMsg = `check that a DNS record exists for`;
 
-            // too many request
-            emitter.emit('error', new Error(tooManyMsg))
+            // 如果收到下方資訊 , 代表近期建立太多次 , letsencrypt 拒絕請求
+            if (data.indexOf(tooManyMsg) > -1) {
 
-        }
+                // too many request
+                clearTimeout(timerId);
+                reject(new Error(tooManyMsg));
+            }
 
-        // SSL 憑證已存在
-        else if (data.indexOf(existedMsg) > -1) {
+            // SSL 憑證已存在
+            else if (data.indexOf(existedMsg) > -1) {
 
-            // certificate already exist
-            emitter.emit('success', existedMsg)
+                // certificate already exist
+                clearTimeout(timerId);
+                resolve(existedMsg);
+            }
 
-        }
+            // 域名不存在
+            else if (data.indexOf(domainNotExistMsg) > -1) {
 
-        // 域名不存在
-        else if (data.indexOf(domainNotExistMsg) > -1) {
+                // domain not found
+                clearTimeout(timerId);
+                reject(new Error(domainNotExistMsg));
+            }
 
-            // domain not found
-            emitter.emit('error', new Error(domainNotExistMsg))
+            // SSL 憑證建立成功
+            else if (data.indexOf(createMsg) > -1) {
 
-        }
-
-        // SSL 憑證建立成功
-        else if (data.indexOf(createMsg) > -1) {
-
-            // successfully created
-            emitter.emit('success', createMsg)
-
-        } else emitter.emit('info', data)
-    });
-
-    return emitter;
+                // successfully created
+                clearTimeout(timerId);
+                resolve(createMsg);
+            }
+        });
+    })
 }
 
 const deleteSSL = domain => {
@@ -58,28 +58,30 @@ const deleteSSL = domain => {
 
     const proc = exec(cmd);
 
-    const emitter = new events.EventEmitter();
+    return new Promise((resolve, reject) => {
 
-    proc.stdout.on("data", (data) => {
+        const timerId = setTimeout(() => reject(new Error('error in delete ssl')), 2000);
 
-        const notExistMsg = `No certificate found with name`;
-        const deleteMsg = `Deleted all files relating to certificate`;
+        proc.stdout.on("data", (data) => {
 
-        // SSL 憑證不存在
-        if (data.indexOf(notExistMsg) > -1) {
+            const notExistMsg = `No certificate found with name`;
+            const deleteMsg = `Deleted all files relating to certificate`;
 
-            emitter.emit('success', notExistMsg)
-        }
+            // SSL 憑證不存在
+            if (data.indexOf(notExistMsg) > -1) {
 
-        // SSL 憑證刪除成功
-        else if (data.indexOf(deleteMsg) > -1) {
+                clearTimeout(timerId);
+                reject(new Error(notExistMsg));
+            }
 
-            emitter.emit('success', deleteMsg)
+            // SSL 憑證刪除成功
+            else if (data.indexOf(deleteMsg) > -1) {
 
-        } else emitter.emit('info', data)
-    });
-
-    return emitter;
+                clearTimeout(timerId);
+                resolve(deleteMsg);
+            }
+        });
+    })
 }
 
 const renewSSL = () => {
@@ -88,28 +90,30 @@ const renewSSL = () => {
 
     const proc = exec(cmd);
 
-    const emitter = new events.EventEmitter();
+    return new Promise((resolve, reject) => {
 
-    proc.stdout.on("data", (data) => {
+        const timerId = setTimeout(() => reject(new Error('error in renew ssl')), 2000);
 
-        const notYetMsg = `Cert not yet due for renewal`;
-        const renewMsg = `Congratulations, all renewals succeeded. The following certs have been renewed`;
+        proc.stdout.on("data", (data) => {
 
-        // SSL 憑證還沒到期 , 不用更新
-        if (data.indexOf(notYetMsg) > -1) {
+            const notYetMsg = `Cert not yet due for renewal`;
+            const renewMsg = `Congratulations, all renewals succeeded. The following certs have been renewed`;
 
-            emitter.emit('success', notYetMsg)
-        }
+            // SSL 憑證還沒到期 , 不用更新
+            if (data.indexOf(notYetMsg) > -1) {
 
-        // SSL 憑證刪除成功
-        else if (data.indexOf(renewMsg) > -1) {
+                clearTimeout(timerId);
+                resolve(notYetMsg);
+            }
 
-            emitter.emit('success', renewMsg)
+            // SSL 更新成功
+            else if (data.indexOf(renewMsg) > -1) {
 
-        } else emitter.emit('info', data)
-    });
-
-    return emitter;
+                clearTimeout(timerId);
+                resolve(renewMsg);
+            }
+        });
+    })
 }
 
 const viewSSLs = async () => {
@@ -168,7 +172,6 @@ const viewSSLs = async () => {
         return newArr.filter(Boolean)
     };
 
-
     const info = await getInfos();
 
     return formatter(info)
@@ -180,21 +183,22 @@ const settingEmail = email => {
 
     const proc = exec(cmd);
 
-    const emitter = new events.EventEmitter();
+    return new Promise((resolve, reject) => {
 
-    proc.stdout.on("data", (data) => {
+        const timerId = setTimeout(() => reject(new Error('error in setting email')), 2000);
 
-        const updatedMsg = `Your e-mail address was updated to`;
+        proc.stdout.on("data", (data) => {
 
-        // 信箱更新成功 , 快過期時 , certbot 會寄信通知
-        if (data.indexOf(updatedMsg) > -1) {
+            const updatedMsg = `Your e-mail address was updated to`;
 
-            emitter.emit('success', updatedMsg)
+            // 信箱更新成功 , 快過期時 , certbot 會寄信通知
+            if (data.indexOf(updatedMsg) > -1) {
 
-        } else emitter.emit('info', data)
-    });
-
-    return emitter;
+                clearTimeout(timerId);
+                resolve(updatedMsg);
+            }
+        });
+    })
 }
 
 const checkCertbotExistence = () => {
