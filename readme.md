@@ -20,6 +20,14 @@ install steps please see : [certbot-installer.md](https://github.com/andrew78102
 
 How to Use node.js exec to control certbot ? please ref : [certbotUtils.js](https://github.com/andrew781026/certbot-gui/blob/master/electron/src/utils/certbotUtils.js)
 
+### build
+
+You can use below to build your win .exe installer at /electron/electron_output/XXX.exe
+
+```shell
+# cd electron && npm run electron:build
+```
+
 ### Aim ( haven't complete )
 
 below is the app will look like 
