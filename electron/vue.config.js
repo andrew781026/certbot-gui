@@ -9,7 +9,7 @@ module.exports = {
                 productName: "certbot-gui-tool",
                 appId: "com.andrewdeveloper.tool.certbot",
                 win: {
-                    target: "nsis",
+                    target: ["nsis", 'portable'],
                     requestedExecutionLevel: "requireAdministrator",  // 以管理人員的身分安裝 APP
                     icon: 'public/electron-certbot-icon.ico', // 安裝檔圖示
                 },
