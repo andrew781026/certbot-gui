@@ -1,12 +1,18 @@
 <template>
   <div class="server-root flex flex-col">
-    <div class="text-xl mb-2" :class="[running ?  'bg-green-400' : 'bg-red-400']">
-      測試用伺服器 - {{ running ? '執行中' : '停止' }}
-    </div>
-    <span class="mb-2">內部：{{ inner_host }}</span>
-    <span class="mb-2">外部：{{ outer_host }}</span>
-    <el-button type="danger" @click="stop()" v-if="running">停止</el-button>
-    <el-button type="success" @click="start()" v-else>啟用</el-button>
+    <template v-if="hasExe">
+      <div class="text-xl mb-2" :class="[running ?  'bg-green-400' : 'bg-red-400']">
+        測試用伺服器 - {{ running ? '執行中' : '停止' }}
+      </div>
+      <span class="mb-2">內部：{{ inner_host }}</span>
+      <span class="mb-2">外部：{{ outer_host }}</span>
+      <el-button type="danger" @click="stop()" v-if="running">停止</el-button>
+      <el-button type="success" @click="start()" v-else>啟用</el-button>
+    </template>
+    <template v-else>
+      <el-input class="mb-2" v-model="binPath" prefix-icon="el-icon-s-tools" placeholder="請輸入 ngrok.exe 所在位置"></el-input>
+      <el-button type="success" @click="hasExe = true">設定</el-button>
+    </template>
   </div>
 </template>
 
@@ -19,7 +25,7 @@ export default {
 
     start(port = 9090) {
 
-      ngrokConnect(port)
+      ngrokConnect({binPath: this.binPath, port})
           .then(outer_host => {
             this.outer_host = outer_host.replace('https://', '');
             this.inner_host = `localhost:${port}`;
@@ -45,6 +51,8 @@ export default {
       inner_host: '',
       outer_host: '',
       running: false,
+      hasExe: false,
+      binPath: null,
     }
   }
 }

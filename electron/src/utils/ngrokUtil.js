@@ -22,12 +22,12 @@ const ngrokUtil = {
 
     },
 
-    async serverStart(port) {
+    async serverStart({binPath = 'D:\\test\\certbot-gui\\electron\\bin', port}) {
 
         // const url = await ngrok.connect(9090); 產生 proxy : https://757c1652.ngrok.io -> http://localhost:9090
         try {
             const rootUrl = await ngrok.connect({
-                binPath: path => 'D:\\test\\certbot-gui\\electron\\bin', // custom binary path, eg for prod in electron
+                binPath: path => binPath, // custom binary path, eg for prod in electron
                 addr: port
             });
             const apiUrl = ngrok.getUrl();
