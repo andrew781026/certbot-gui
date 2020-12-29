@@ -1,5 +1,18 @@
 import {ipcMain, BrowserWindow} from 'electron';
 import CertbotUtils from './utils/certbotUtils';
+import NgrokUtils from './utils/ngrokUtil';
+
+const listenerFn = fn => {
+
+    return async function (event, args) {
+
+        try {
+            return await fn(args);
+        } catch (e) {
+            throw e.message
+        }
+    }
+}
 
 const showErrMsg = (event, err) => {
     console.error(err);
@@ -7,18 +20,6 @@ const showErrMsg = (event, err) => {
 };
 
 const registerCertbotFn = () => {
-
-    const listenerFn = fn => {
-
-        return async function (event, args) {
-
-            try {
-                return await fn(args);
-            } catch (e) {
-                throw e.message
-            }
-        }
-    }
 
     ipcMain.handle('certbot:addSSL', listenerFn(CertbotUtils.addSSL))
 
@@ -31,6 +32,14 @@ const registerCertbotFn = () => {
     ipcMain.handle('certbot:checkCertbotExistence', listenerFn(CertbotUtils.checkCertbotExistence))
 
     ipcMain.handle('certbot:checkCertbotPermit', listenerFn(CertbotUtils.checkCertbotPermit))
+
+};
+
+const registerNgrokFn = () => {
+
+    ipcMain.handle('ngrok:connect', listenerFn(NgrokUtils.serverStart))
+
+    ipcMain.handle('ngrok:disconnect', listenerFn(NgrokUtils.serverStop))
 
 };
 
@@ -59,3 +68,4 @@ const registerTitleBarFn = () => {
 
 registerTitleBarFn();
 registerCertbotFn();
+registerNgrokFn();

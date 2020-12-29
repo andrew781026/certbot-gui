@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <TitleBar/>
+    <TestServer/>
     <main>
       <router-view/>
     </main>
@@ -9,10 +10,11 @@
 
 <script>
 import TitleBar from "@/components/TitleBar";
+import TestServer from "@/components/TestServer";
 
 export default {
   name: 'App',
-  components: {TitleBar},
+  components: {TestServer, TitleBar},
 }
 </script>
 
