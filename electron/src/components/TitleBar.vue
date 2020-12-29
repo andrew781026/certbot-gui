@@ -30,6 +30,7 @@
 
 <script>
 import {backArrowVisible} from "@/compositions/useBackArrow";
+import {min, max, back, restore, exit} from "@/ipcRenderer/titlebar";
 
 export default {
   name: "TitleBar",
@@ -38,29 +39,19 @@ export default {
     return {backArrowVisible}
   },
   methods: {
-    back() {
-
-      window.history.back();
-    },
-    min() {
-
-      window.ipcRenderer.send('titlebar:minimize');
-    },
+    back,
+    min,
     max() {
 
-      window.ipcRenderer.send('titlebar:maximize');
+      max();
       this.isMax = true;
     },
     restore() {
 
-      window.ipcRenderer.send('titlebar:unmaximize');
+      restore();
       this.isMax = false;
     },
-    exit() {
-
-      console.log('exit')
-      window.ipcRenderer.send('titlebar:exit');
-    },
+    exit,
   },
   data() {
 

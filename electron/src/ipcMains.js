@@ -62,7 +62,8 @@ const registerTitleBarFn = () => {
 
     ipcMain.on('titlebar:exit', event => {
 
-        BrowserWindow.fromWebContents(event.sender).close();
+        // destroy = force close the app window
+        BrowserWindow.fromWebContents(event.sender).destroy();
     })
 }
 

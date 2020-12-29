@@ -23,11 +23,15 @@ export default {
 
         if (err.message.indexOf('administrative rights') > -1) {
 
+          /*
           this.$notify.error({
             title: '權限不足',
             message: err.message,
             offset: 40
           });
+           */
+
+          this.$router.push({name: 'PermitDeny'})
 
         } else this.$router.push({name: 'PleaseInstallCertbot'})
 

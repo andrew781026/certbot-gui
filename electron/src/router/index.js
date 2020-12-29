@@ -30,6 +30,11 @@ const routes = [
         component: () => import('../views/AddSSL')
     },
     {
+        path: '/permit-deny',
+        name: 'PermitDeny',
+        component: () => import('../views/PermitDeny')
+    },
+    {
         path: '/check-certbot',
         name: 'CheckCertbot',
         component: () => import('../views/CheckCertbot')
