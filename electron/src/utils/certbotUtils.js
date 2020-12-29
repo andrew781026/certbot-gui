@@ -243,6 +243,26 @@ const checkCertbotExistence = () => {
     })
 }
 
+const checkCertbotPermit = () => {
+
+    return new Promise((resolve, reject) => {
+
+        const errMsg = 'Error, certbot must be run on a shell with administrative rights.';
+
+        exec('certbot renew -n', (error, stdout) => {
+
+            if (error) {
+
+                const err = new Error();
+                err.message = errMsg
+                err.stack = error;
+                reject(err)
+
+            } else resolve(stdout)
+        });
+    })
+}
+
 module.exports = {
     viewSSLs,
     addSSL,
@@ -250,4 +270,5 @@ module.exports = {
     renewSSL,
     settingEmail,
     checkCertbotExistence,
+    checkCertbotPermit,
 }

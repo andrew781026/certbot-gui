@@ -8,50 +8,29 @@ const showErrMsg = (event, err) => {
 
 const registerCertbotFn = () => {
 
-    ipcMain.handle('certbot:addSSL', async (event, domain) => {
+    const listenerFn = fn => {
 
-        try {
-            return await CertbotUtils.addSSL(domain);
-        } catch (e) {
-            throw e.message
+        return async function (event, args) {
+
+            try {
+                return await fn(args);
+            } catch (e) {
+                throw e.message
+            }
         }
-    })
+    }
 
-    ipcMain.handle('certbot:deleteSSL', async (event, domain) => {
+    ipcMain.handle('certbot:addSSL', listenerFn(CertbotUtils.addSSL))
 
-        try {
-            return await CertbotUtils.deleteSSL(domain);
-        } catch (e) {
-            throw e.message
-        }
-    })
+    ipcMain.handle('certbot:deleteSSL', listenerFn(CertbotUtils.deleteSSL))
 
-    ipcMain.handle('certbot:viewSSLs', async () => {
+    ipcMain.handle('certbot:viewSSLs', listenerFn(CertbotUtils.viewSSLs))
 
-        try {
-            return await CertbotUtils.viewSSLs();
-        } catch (e) {
-            throw e.message
-        }
-    })
+    ipcMain.handle('certbot:settingEmail', listenerFn(CertbotUtils.settingEmail))
 
-    ipcMain.handle('certbot:settingEmail', async (event, email) => {
+    ipcMain.handle('certbot:checkCertbotExistence', listenerFn(CertbotUtils.checkCertbotExistence))
 
-        try {
-            return await CertbotUtils.settingEmail(email);
-        } catch (e) {
-            throw e.message
-        }
-    })
-
-    ipcMain.handle('certbot:checkCertbotExistence', async () => {
-
-        try {
-            return await CertbotUtils.checkCertbotExistence();
-        } catch (e) {
-            throw e.message
-        }
-    })
+    ipcMain.handle('certbot:checkCertbotPermit', listenerFn(CertbotUtils.checkCertbotPermit))
 
 };
 

@@ -35,8 +35,8 @@ export default {
     rules() {
 
       return [
-        {required: true, message: '请输入邮箱地址', trigger: 'blur'},
-        {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
+        {required: true, message: '請輸入信箱地址', trigger: 'blur'},
+        {type: 'email', message: '請輸入正確的信箱地址', trigger: ['blur', 'change']}
       ]
     }
   },
@@ -50,7 +50,14 @@ export default {
 
       settingEmail(this.email)
           .then(() => this.$router.push({name: 'FeaturesMenu'}))
-          .catch(console.error)
+          .catch(err => {
+
+            console.error(err);
+            this.$notify.error({
+              title: '設定錯誤',
+              message: err.message
+            });
+          })
     }
   }
 }

@@ -6,15 +6,35 @@
 </template>
 
 <script>
-import {checkCertbotExistence} from "@/utils/eventCenter";
+import {checkCertbotExistence, checkCertbotPermit} from "@/utils/eventCenter";
 
 export default {
   name: "CheckCertbot",
   mounted() {
 
-    checkCertbotExistence()
-        .then(() => this.$router.push({name: 'FeaturesMenu'}))
-        .catch(() => this.$router.push({name: 'PleaseInstallCertbot'}))
+    const checkFn = async () => {
+
+      try {
+
+        await checkCertbotExistence();
+        await checkCertbotPermit();
+
+      } catch (err) {
+
+        if (err.message.indexOf('administrative rights') > -1) {
+
+          this.$notify.error({
+            title: '權限不足',
+            message: err.message,
+            offset: 40
+          });
+
+        } else this.$router.push({name: 'PleaseInstallCertbot'})
+
+      }
+    }
+
+    checkFn()
   },
 }
 </script>

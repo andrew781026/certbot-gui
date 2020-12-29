@@ -10,3 +10,5 @@ export const settingEmail = email => ipcRenderer.invoke('certbot:settingEmail', 
 
 export const checkCertbotExistence = () => ipcRenderer.invoke('certbot:checkCertbotExistence');
 
+export const checkCertbotPermit = () => ipcRenderer.invoke('certbot:checkCertbotPermit');
+
