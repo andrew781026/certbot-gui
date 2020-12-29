@@ -116,6 +116,28 @@ const renewSSL = () => {
     })
 }
 
+/**
+ * @return {Array}
+ *   the array will look like BELOW :
+ *       [
+             {
+                'Serial Number': '3f3b3ea60560c578de50ba7c2aa583d1f46',
+                'Key Type': 'RSA',
+                Domains: 'azure.stg.andrewdeveloper.com',
+                'Expiry Date': '2021-03-24 07:35:35+00:00 (VALID: 89 days)',
+                'Certificate Path': 'C:\\Certbot\\live\\azure.stg.andrewdeveloper.com\\fullchain.pem',
+                'Private Key Path': 'C:\\Certbot\\live\\azure.stg.andrewdeveloper.com\\privkey.pem'
+              },
+             {
+                'Serial Number': '35ea37b57e5e8d37f7f43603f49ab480f51',
+                'Key Type': 'RSA',
+                Domains: 'azure2.test.andrewdeveloper.com',
+                'Expiry Date': '2021-03-22 04:57:48+00:00 (VALID: 87 days)',
+                'Certificate Path': 'C:\\Certbot\\live\\azure2.test.andrewdeveloper.com\\fullchain.pem',
+                'Private Key Path': 'C:\\Certbot\\live\\azure2.test.andrewdeveloper.com\\privkey.pem'
+              }
+         ]
+ * */
 const viewSSLs = async () => {
 
     const getInfos = () => {
