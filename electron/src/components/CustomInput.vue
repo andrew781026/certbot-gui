@@ -1,8 +1,11 @@
 <template>
+  <!-- v-bind="$attrs" 將 parent 參數繼承 v-on="$listeners" 將 parent 動作繼承 -->
   <el-input :value="value"
             @input="$emit('input',$event)"
             clearable
-            :placeholder="placeholder">
+            :placeholder="placeholder"
+            v-bind="$attrs"
+            v-on="$listeners">
     <img style="width: 26px;margin: 7px 0 0 4px" slot="prefix"
          :src="imgSrc"
          alt="domain-reg">

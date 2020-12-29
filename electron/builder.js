@@ -12,7 +12,7 @@ const config = {
             "package.json"
         ],
         "win": {
-            "target": "nsis",
+            "target": ["nsis", 'portable'],
             "requestedExecutionLevel": "requireAdministrator"  // 以管理人員的身分安裝 APP
         },
         "nsis": {

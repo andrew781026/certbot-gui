@@ -4,6 +4,7 @@ const ngrok = require('ngrok');
 const ngrokUtil = {
 
     async getRootUrl({port}) {
+
         // const url = await ngrok.connect(9090); 產生 proxy : https://757c1652.ngrok.io -> http://localhost:9090
         try{
             const rootUrl = await ngrok.connect(port);
@@ -19,7 +20,7 @@ const ngrokUtil = {
     },
 }
 
-const rootUrl= ngrokUtil.getRootUrl({port:80});
-console.log(rootUrl);
+// const rootUrl= ngrokUtil.getRootUrl({port:80});
+// console.log(rootUrl);
 
 module.exports = ngrokUtil;
