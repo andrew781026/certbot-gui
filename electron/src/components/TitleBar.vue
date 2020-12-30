@@ -6,6 +6,8 @@
         <i class="el-icon-back"></i>
       </div>
 
+      <span class="ml-4 text-2xl text-green-200">Certbot 管理器</span>
+
       <div id="window-controls" class="no-drag">
 
         <div class="button" id="min-button" @click="min">
