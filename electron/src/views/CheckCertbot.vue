@@ -22,8 +22,6 @@ export default {
             () => this.$router.push({name: 'PermitDeny'})
         )
   },
-  beforeDestroy() {
-  }
 }
 </script>
 

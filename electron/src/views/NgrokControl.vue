@@ -1,6 +1,7 @@
 <template>
-  <div class="server-root flex flex-col">
-    <template v-if="hasExe">
+  <div class="flex-center flex-col">
+    <FloatSwitch/>
+    <template>
       <div class="text-xl mb-2" :class="[running ?  'bg-green-400' : 'bg-red-400']">
         測試用伺服器 - {{ running ? '執行中' : '停止' }}
       </div>
@@ -9,23 +10,22 @@
       <el-button type="danger" @click="stop()" v-if="running">停止</el-button>
       <el-button type="success" @click="start()" v-else>啟用</el-button>
     </template>
-    <template v-else>
-      <el-input class="mb-2" v-model="binPath" prefix-icon="el-icon-s-tools" placeholder="請輸入 ngrok.exe 所在位置"></el-input>
-      <el-button type="success" @click="hasExe = true">設定</el-button>
-    </template>
   </div>
 </template>
 
 <script>
 import {ngrokDisconnect, ngrokConnect} from "@/ipcRenderer/ngrok";
+import FloatSwitch from "@/components/FloatSwitch";
 
 export default {
-  name: "TestServer",
+  name: "NgrokControl",
+  components: {FloatSwitch},
   methods: {
-
     start(port = 9090) {
 
-      ngrokConnect({binPath: this.binPath, port})
+      console.log('exePath=', this.exePath)
+
+      ngrokConnect({exePath: this.exePath, port})
           .then(outer_host => {
             this.outer_host = outer_host.replace('https://', '');
             this.inner_host = `localhost:${port}`;
@@ -51,21 +51,12 @@ export default {
       inner_host: '',
       outer_host: '',
       running: false,
-      hasExe: false,
-      binPath: null,
+      exePath: './bin/ngrok.exe',
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.server-root {
-  border: 1px solid #254053;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  left: 10px;
-  bottom: 10px;
-  border-radius: 10px;
-  padding: 14px;
-}
+
 </style>

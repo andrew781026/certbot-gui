@@ -16,6 +16,7 @@
   "dependencies": {
     "@vue/composition-api": "^1.0.0-beta.19",
     "core-js": "^3.6.5",
+    "download": "^8.0.0",
     "element-ui": "^2.14.1",
     "ngrok": "^3.4.0",
     "tailwindcss": "^2.0.2",

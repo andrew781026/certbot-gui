@@ -10,6 +10,11 @@ const routes = [
         component: () => import('../views/PleaseInstallCertbot')
     },
     {
+        path: '/plz-install-ngrok',
+        name: 'PleaseInstallNgrok',
+        component: () => import('../views/PleaseInstallNgrok')
+    },
+    {
         path: '/notify-email',
         name: 'NotifyEmail',
         component: () => import('../views/NotifyEmail')
@@ -48,6 +53,11 @@ const routes = [
         path: '/features-menu',
         name: 'FeaturesMenu',
         component: () => import('../views/FeaturesMenu')
+    },
+    {
+        path: '/ngrok-control',
+        name: 'NgrokControl',
+        component: () => import('../views/NgrokControl')
     },
     {
         path: '/home',

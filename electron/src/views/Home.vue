@@ -5,7 +5,7 @@
       <el-button type="success" @click="$router.push({name: 'CheckCertbot'})">
         <span class="text-3xl">我有域名 🚀</span>
       </el-button>
-      <el-button type="danger" @click="$router.push({name: 'CheckCertbot'})">
+      <el-button type="danger" @click="$router.push({name: 'CheckNgrok'})">
         <span class="text-3xl">沒有域名 😢</span>
       </el-button>
     </div>

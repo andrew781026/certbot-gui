@@ -7,6 +7,7 @@ const listenerFn = fn => {
     return async function (event, args) {
 
         try {
+
             return await fn(args);
         } catch (e) {
             throw e.message
@@ -36,6 +37,24 @@ const registerCertbotFn = () => {
 };
 
 const registerNgrokFn = () => {
+
+    ipcMain.handle('ngrok:checkNgrokExistence', listenerFn(NgrokUtils.checkNgrokExistence))
+
+    ipcMain.handle('ngrok:downloadNgrok', async function (event, args) {
+
+        try {
+
+            const duplexStream = NgrokUtils.downloadNgrok(args);
+
+            // params = {data, downloadedLength, totalLength}
+            const getDataCallback = params => event.reply('ngrok:got-data', params);
+            duplexStream.on('got-data', getDataCallback);
+
+            return await duplexStream
+        } catch (e) {
+            throw e.message
+        }
+    })
 
     ipcMain.handle('ngrok:connect', listenerFn(NgrokUtils.serverStart))
 

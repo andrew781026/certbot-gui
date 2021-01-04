@@ -6,11 +6,17 @@
 </template>
 
 <script>
+import {checkNgrokExistence} from "@/ipcRenderer/ngrok";
 
 export default {
   name: "CheckNgrok",
   mounted() {
 
+    checkNgrokExistence()
+        .then(
+            () => this.$router.push({name: 'NgrokControl'}),
+            () => this.$router.push({name: 'PleaseInstallNgrok'})
+        )
   },
 }
 </script>
