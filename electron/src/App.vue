@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TitleBar/>
-    <TestServer/>
+    <FloatSwitch/>
     <main>
       <router-view/>
     </main>
@@ -10,11 +10,11 @@
 
 <script>
 import TitleBar from "@/components/TitleBar";
-import TestServer from "@/components/TestServer";
+import FloatSwitch from "@/components/FloatSwitch";
 
 export default {
   name: 'App',
-  components: {TestServer, TitleBar},
+  components: {FloatSwitch, TitleBar},
 }
 </script>
 

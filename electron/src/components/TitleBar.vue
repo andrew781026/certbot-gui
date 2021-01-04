@@ -6,7 +6,7 @@
         <i class="el-icon-back"></i>
       </div>
 
-      <span class="ml-4 text-2xl text-green-200">Certbot 管理器</span>
+      <span class="ml-4 text-2xl text-green-200">{{ appTitle }}</span>
 
       <div id="window-controls" class="no-drag">
 
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import {appTitle} from "@/compositions/useTitle";
 import {backArrowVisible} from "@/compositions/useBackArrow";
 import {min, max, back, restore, exit} from "@/ipcRenderer/titlebar";
 
@@ -38,7 +39,7 @@ export default {
   name: "TitleBar",
   setup() {
 
-    return {backArrowVisible}
+    return {backArrowVisible, appTitle}
   },
   methods: {
     back,

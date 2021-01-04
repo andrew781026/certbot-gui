@@ -12,7 +12,7 @@ So , I will make a GUI for it , Good Luck to myself 🙆‍♂️, Making this t
 
 ### preinstall
 
-You must have installed the certbot on your win os 
+Please installed the certbot on your win os 
 
 install steps please see : [certbot-installer.md](https://github.com/andrew781026/certbot-gui/blob/master/certbot-installer.md)
 

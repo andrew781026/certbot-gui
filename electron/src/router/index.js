@@ -40,6 +40,11 @@ const routes = [
         component: () => import('../views/CheckCertbot')
     },
     {
+        path: '/check-ngrok',
+        name: 'CheckNgrok',
+        component: () => import('../views/CheckNgrok')
+    },
+    {
         path: '/features-menu',
         name: 'FeaturesMenu',
         component: () => import('../views/FeaturesMenu')
