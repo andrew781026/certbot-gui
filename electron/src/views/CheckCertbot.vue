@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>確認 Certbot 是否已安裝</h1>
+  <div class="flex-center flex-col">
+    <h1 class="text-4xl">確認 Certbot 是否已安裝</h1>
     <img :src="require('@/assets/loading.svg')" alt="loading">
   </div>
 </template>
@@ -28,5 +28,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

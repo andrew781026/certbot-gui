@@ -1,16 +1,21 @@
 <template>
   <el-popover
       :visible-arrow="false"
+      :value="visible"
       class="float-icon"
       placement="top-start"
       width="200"
-      trigger="click">
-    <el-button slot="reference" type="info" class="set-btn" icon="el-icon-s-tools" circle></el-button>
+      trigger="manual">
+    <el-button slot="reference" type="info"
+               class="set-btn" icon="el-icon-s-tools"
+               @click="openMenu" circle></el-button>
     <template>
-      <img :src="require('@/assets/logos/ngrok-logo.png')"
+      <img class="logo-img"
+           :src="require('@/assets/logos/ngrok-logo.png')"
            alt="ngrok-logo"
            @click="routing('CheckNgrok')">
-      <img :src="require('@/assets/logos/certbot-logo.png')"
+      <img class="logo-img"
+           :src="require('@/assets/logos/certbot-logo.png')"
            alt="certbot-logo"
            @click="routing('CheckCertbot')">
     </template>
@@ -22,14 +27,20 @@ export default {
   name: "FloatSwitch",
   methods: {
 
+    openMenu() {
+
+      this.visible = true;
+    },
     routing(name) {
 
-      this.$router.push({name})
+      this.$router.push({name});
+      this.visible = false;
     }
   },
   data() {
 
     return {
+      visible: false,
       menus: [
         {
           name: 'PleaseInstallCertbot',
@@ -61,5 +72,19 @@ export default {
 .set-btn {
   padding: 7px;
   font-size: 30px;
+}
+
+.logo-img {
+  cursor: pointer;
+
+  &:hover {
+    // 參考資料 : http://blog.shihshih.com/css-filter/
+    filter: drop-shadow(3px 3px 3px #1374f1);
+  }
+
+  &:active {
+    // 參考資料 : http://blog.shihshih.com/css-filter/
+    filter: drop-shadow(5px 5px 5px #1465ce);
+  }
 }
 </style>
