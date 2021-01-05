@@ -1,4 +1,4 @@
-import {ipcMain, BrowserWindow} from 'electron';
+import {ipcMain, BrowserWindow, shell} from 'electron';
 import CertbotUtils from './utils/certbotUtils';
 import NgrokUtils from './utils/ngrokUtil';
 
@@ -47,7 +47,7 @@ const registerNgrokFn = () => {
             const duplexStream = NgrokUtils.downloadNgrok(args);
 
             // params = {data, downloadedLength, totalLength}
-            const getDataCallback = params => event.reply('ngrok:got-data', params);
+            const getDataCallback = params => event.sender.send('ngrok:got-data', params);
             duplexStream.on('got-data', getDataCallback);
 
             return await duplexStream
@@ -85,6 +85,8 @@ const registerTitleBarFn = () => {
         BrowserWindow.fromWebContents(event.sender).destroy();
     })
 }
+
+ipcMain.on('andrew:open-url', (event, url) => shell.openExternal(url));
 
 registerTitleBarFn();
 registerCertbotFn();

@@ -7,7 +7,14 @@ const _ = require('lodash');
 // 參考資料 : https://www.npmjs.com/package/ngrok
 const ngrokUtil = {
 
-    async downloadNgrok(
+    /**
+     * 下載 ngrok.exe 到指定位置
+     * @param url
+     * @param dest
+     * @param delay
+     * @return {Promise}
+     */
+    downloadNgrok(
         url = 'https://github.com/andrew781026/certbot-gui/releases/download/v0.0.1-alpha/ngrok.exe',
         dest = "./bin/ngrok.exe",
         delay = 500,

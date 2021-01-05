@@ -8,13 +8,15 @@
       trigger="manual">
     <el-button slot="reference" type="info"
                class="set-btn" icon="el-icon-s-tools"
-               @click="openMenu" circle></el-button>
+               @click="toggleMenu" circle></el-button>
     <template>
-      <img class="logo-img"
+      <img v-if="curr !=='ngrok'"
+           class="logo-img"
            :src="require('@/assets/logos/ngrok-logo.png')"
            alt="ngrok-logo"
            @click="routing('CheckNgrok')">
-      <img class="logo-img"
+      <img v-if="curr !=='certbot'"
+           class="logo-img"
            :src="require('@/assets/logos/certbot-logo.png')"
            alt="certbot-logo"
            @click="routing('CheckCertbot')">
@@ -25,11 +27,21 @@
 <script>
 export default {
   name: "FloatSwitch",
+  props: {
+
+    curr: {
+      type: String,
+      validator: function (value) {
+        // The value must match one of these strings
+        return ['certbot', 'ngrok'].indexOf(value) !== -1
+      }
+    }
+  },
   methods: {
 
-    openMenu() {
+    toggleMenu() {
 
-      this.visible = true;
+      this.visible = !this.visible;
     },
     routing(name) {
 
