@@ -20,6 +20,12 @@ const ngrokUtil = {
         delay = 500,
     ) {
 
+        // 如果目標資料夾不存在 , 建立資料夾
+        const destFolder = path.dirname(dest);
+        if (!fs.existsSync(destFolder)) {
+            fs.mkdirSync(destFolder, {recursive: true});
+        }
+
         // 限制每 0.5 秒至多執行 1 次
         const throttleFunc = _.throttle(func => func(), delay);
 

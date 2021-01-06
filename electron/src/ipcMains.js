@@ -1,6 +1,7 @@
 import {ipcMain, BrowserWindow, shell} from 'electron';
 import CertbotUtils from './utils/certbotUtils';
 import NgrokUtils from './utils/ngrokUtil';
+import HttpUtils from './utils/httpUtils';
 
 const listenerFn = fn => {
 
@@ -56,9 +57,34 @@ const registerNgrokFn = () => {
         }
     })
 
-    ipcMain.handle('ngrok:connect', listenerFn(NgrokUtils.serverStart))
+    ipcMain.handle('ngrok:connect', async function (event, args) {
 
-    ipcMain.handle('ngrok:disconnect', listenerFn(NgrokUtils.serverStop))
+        try {
+
+            const {exePath, port} = args || {};
+            const result = NgrokUtils.serverStart({exePath, port});
+            HttpUtils.createServer(port);
+            console.log('Success Start 🛰 ');
+
+            return result
+        } catch (e) {
+            throw e.message
+        }
+    })
+
+    ipcMain.handle('ngrok:disconnect', async function (event, url) {
+
+        try {
+
+            const result = NgrokUtils.serverStop(url);
+            HttpUtils.stopServer();
+            console.log('Success Stop 🛑 ');
+
+            return result
+        } catch (e) {
+            throw e.message
+        }
+    })
 
 };
 
