@@ -3,6 +3,7 @@ const {exec} = require('child_process');
 const addSSL = domain => {
 
     const cmd = `certbot certonly --standalone -d ${domain} -n`
+    // const cmd = `certbot certonly --standalone -d ${domain} -n --agree-tos --email ${email}`
 
     const proc = exec(cmd);
 
@@ -16,6 +17,7 @@ const addSSL = domain => {
             const existedMsg = `Keeping the existing certificate`;
             const createMsg = `Congratulations! Your certificate and chain have been saved at`;
             const domainNotExistMsg = `check that a DNS record exists for`;
+            const needRegisterEmail = `You should register before running non-interactively, or provide --agree-tos and --email <email_address> flags.`;
 
             // 如果收到下方資訊 , 代表近期建立太多次 , letsencrypt 拒絕請求
             if (data.indexOf(tooManyMsg) > -1) {
