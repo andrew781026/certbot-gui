@@ -50,6 +50,11 @@ const registerNgrokFn = () => {
             // params = {data, downloadedLength, totalLength}
             const getDataCallback = params => event.sender.send('ngrok:got-data', params);
             duplexStream.on('got-data', getDataCallback);
+            duplexStream.on('error', err => {
+
+                console.error(err);
+                event.sender.send('ngrok:download-error', err.message);
+            });
 
             return await duplexStream
         } catch (e) {

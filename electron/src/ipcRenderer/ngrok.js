@@ -11,3 +11,5 @@ export const gotDataListener = cb => ipcRenderer.on('ngrok:got-data', (event, pa
     const {data, downloadedLength, totalLength} = params;
     cb({data, downloadedLength, totalLength});
 });
+
+export const errMsgListener = cb => ipcRenderer.on('ngrok:download-error', (event, errMsg) => cb(errMsg));

@@ -48,7 +48,7 @@ const ngrokUtil = {
             });
         });
 
-        duplexStream.on("error", err => console.error(err));
+        // duplexStream.on("error", err => console.error(err));
 
         duplexStream.pipe(writeStream);
 
