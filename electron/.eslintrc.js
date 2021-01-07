@@ -6,7 +6,7 @@ module.exports = {
     parser: "babel-eslint"
   },
   rules: {
-    semi: ["error", "always"],
+    semi: ["error", "never"],
     "no-console": "off"
   }
 };

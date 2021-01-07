@@ -1,34 +1,30 @@
-const http = require('http');
-const destroyer = require('server-destroy');
+const http = require('http')
+const destroyer = require('server-destroy')
 
-let server;
+let server
 
 const httpUtil = {
-
     createServer: port => {
-
         const html = `<meta charset="UTF-8"><h1>Ngrok Tool Server Start 🛸</h1>`
 
         // Server has a 5 seconds keep-alive timeout by default
         server = http
             .createServer((req, res) => {
-
-                res.writeHead(200, {'Content-Type': 'text/html', 'charset': 'utf8'});
-                res.write(html);
-                res.end();
+                res.writeHead(200, { 'Content-Type': 'text/html', charset: 'utf8' })
+                res.write(html)
+                res.end()
             })
-            .listen(port);
+            .listen(port)
 
         // 註冊 destroyer
-        destroyer(server);
+        destroyer(server)
 
-        return server;
+        return server
     },
 
     stopServer: () => {
-
-        server.destroy();
+        server.destroy()
     },
-};
+}
 
-module.exports = httpUtil;
+module.exports = httpUtil

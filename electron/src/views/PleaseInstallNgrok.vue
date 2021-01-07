@@ -7,7 +7,7 @@
             <a href="https://github.com/andrew781026/certbot-gui/releases/download/v0.0.1-alpha/ngrok.exe">
                 https://github.com/andrew781026/certbot-gui/releases/download/v0.0.1-alpha/ngrok.exe
             </a>
-            <br>
+            <br />
             <el-button type="primary" @click="install">安裝 Ngrok</el-button>
             <el-button type="warning" @click="toCheckCertbotPage">使用 Certbot</el-button>
         </template>
@@ -15,49 +15,37 @@
 </template>
 
 <script>
-    import {downloadNgrok, gotDataListener, errMsgListener} from "@/ipcRenderer/ngrok";
+import { downloadNgrok, gotDataListener, errMsgListener } from '@/ipcRenderer/ngrok'
 
-    export default {
-        name: "PleaseInstallNgrok",
-        mounted() {
+export default {
+    name: 'PleaseInstallNgrok',
+    mounted() {
+        // register getData
+        gotDataListener(({ downloadedLength, totalLength }) => {
+            this.percentage = Math.floor((downloadedLength * 100) / totalLength)
+        })
 
-            // register getData
-            gotDataListener(({downloadedLength, totalLength}) => {
+        errMsgListener(errMsg => (this.error = errMsg))
+    },
+    methods: {
+        install() {
+            downloadNgrok().then(() => this.$router.push({ name: 'NgrokControl' }), console.error)
 
-                this.percentage = Math.floor(downloadedLength * 100 / totalLength);
-            });
-
-            errMsgListener(errMsg => this.error = errMsg);
+            this.downloading = true
         },
-        methods: {
 
-            install() {
-
-                downloadNgrok()
-                        .then(
-                                () => this.$router.push({name: 'NgrokControl'}),
-                                console.error
-                        )
-
-                this.downloading = true;
-            },
-
-            toCheckCertbotPage() {
-
-                this.$router.push({name: 'CheckCertbot'});
-            }
+        toCheckCertbotPage() {
+            this.$router.push({ name: 'CheckCertbot' })
         },
-        data() {
-
-            return {
-                percentage: 0,
-                downloading: false,
-                error: undefined,
-            }
+    },
+    data() {
+        return {
+            percentage: 0,
+            downloading: false,
+            error: undefined,
         }
-    }
+    },
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

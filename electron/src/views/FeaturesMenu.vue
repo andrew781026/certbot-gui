@@ -1,84 +1,76 @@
 <template>
-  <div>
-    <FloatSwitch curr="certbot"/>
-    <h1 class="text-4xl mb-3">功能列表</h1>
-    <div class="btn-wrap">
-      <div class="box" @click="add">新增</div>
-      <div class="box" @click="deleteSSL">刪除</div>
-      <div class="box" @click="view">查看</div>
-      <div class="box" @click="setting">設定</div>
+    <div>
+        <FloatSwitch curr="certbot" />
+        <h1 class="text-4xl mb-3">功能列表</h1>
+        <div class="btn-wrap">
+            <div class="box" @click="add">新增</div>
+            <div class="box" @click="deleteSSL">刪除</div>
+            <div class="box" @click="view">查看</div>
+            <div class="box" @click="setting">設定</div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import {showBackArrow,hideBackArrow} from "@/compositions/useBackArrow";
-import FloatSwitch from "@/components/FloatSwitch";
+import { showBackArrow, hideBackArrow } from '@/compositions/useBackArrow'
+import FloatSwitch from '@/components/FloatSwitch'
 
 export default {
-  name: "FeaturesMenu",
-  components: {FloatSwitch},
-  mounted() {
-
-    hideBackArrow();
-  },
-  methods: {
-    add() {
-
-      showBackArrow();
-      this.$router.push({name: 'AddSSL'})
+    name: 'FeaturesMenu',
+    components: { FloatSwitch },
+    mounted() {
+        hideBackArrow()
     },
-    deleteSSL() {
-
-      showBackArrow();
-      this.$router.push({name: 'DeleteSSL'})
+    methods: {
+        add() {
+            showBackArrow()
+            this.$router.push({ name: 'AddSSL' })
+        },
+        deleteSSL() {
+            showBackArrow()
+            this.$router.push({ name: 'DeleteSSL' })
+        },
+        view() {
+            showBackArrow()
+            this.$router.push({ name: 'ViewSSL' })
+        },
+        setting() {
+            showBackArrow()
+            this.$router.push({ name: 'NotifyEmail' })
+        },
     },
-    view() {
-
-      showBackArrow();
-      this.$router.push({name: 'ViewSSL'})
-    },
-    setting() {
-
-      showBackArrow();
-      this.$router.push({name: 'NotifyEmail'})
-    },
-  }
 }
 </script>
 
 <style scoped lang="scss">
-
 .btn-wrap {
-  gap: 10px;
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .btn-wrap .box {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  font-size: 40px;
-  color: #ffffff;
-  font-weight: 700;
-  background-color: #409eff;
-  height: 150px;
-  width: 150px;
-  border-radius: 10px;
-  border: 2px solid #254053;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    font-size: 40px;
+    color: #ffffff;
+    font-weight: 700;
+    background-color: #409eff;
+    height: 150px;
+    width: 150px;
+    border-radius: 10px;
+    border: 2px solid #254053;
 
-  &:hover {
+    &:hover {
+        background-color: #1d63ef;
+    }
 
-    background-color: #1d63ef;
-  }
-
-  &:active {
-
-    background-color: #2d0ae8;
-  }
+    &:active {
+        background-color: #2d0ae8;
+    }
 }
 </style>
